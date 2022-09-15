@@ -33,7 +33,7 @@ app.use(express.static('public'));
 
 //ルーティング
 //今回はルーティングを別ファイルに分けている
-const home = require('./home.js');
+const home = require('./routes/home.js');
 app.use('/', home);
 
 //サーバーの起動
