@@ -11,28 +11,29 @@ const cookieParser = require('cookie-parser');
 const multer = require('multer');
 const upload = multer({dest: './uploads/'});
 const path = require('path');
+const logger = require('morgan');
 
-//ejsの設定
+
+
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-//セッションの設定
-app.use(cookieParser());
+
+
+
 app.use(session({
     secret: 'secret',
     resave: false,
     saveUninitialized: true
 }));
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
-//body-parserの設定
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
 
-//静的ファイルの設定
-app.use(express.static('public'));
 
-//ルーティング
-//今回はルーティングを別ファイルに分けている
 const home = require('./routes/home.js');
 app.use('/', home);
 
