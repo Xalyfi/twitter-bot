@@ -37,6 +37,6 @@ const home = require('./routes/home.js');
 app.use('/', home);
 
 //サーバーの起動
-app.listen(3000, function(){
+app.listen(80, function(){
     console.log('server start');
 });
