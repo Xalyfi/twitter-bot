@@ -29,23 +29,23 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+
+const home = require('./routes/home.js');
+const followers = require('./routes/followers.js');
+//const login = require('./routes/login.js');
+
+
+app.use('/', home);
+app.use('/followers', followers);
+//app.use('/login', login);
 app.use(twitterOAuth2({
     client_id: 'ZzBUX2VZY2hJRWxCTXp4SUlLQ1Y6MTpjaQ',
     client_secret: client_secret,
     redirect_uri: 'https://minato37103710-xalyfi-twitter-bot-v574p4gqx7x3wv7v-80.githubpreview.dev/login',
     scope: 'tweet.read users.read offline.access'
 }))
-
-
-const home = require('./routes/home.js');
-const followers = require('./routes/followers.js');
-const login = require('./routes/login.js');
-
-
-app.use('/', home);
-app.use('/followers', followers);
-app.use('/login', login);
-
 
 //サーバーの起動
 app.listen(80, function(){
