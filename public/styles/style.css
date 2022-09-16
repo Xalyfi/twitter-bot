@@ -1,0 +1,18 @@
+*{
+  margin:0;
+}
+.layout {
+  width: 1366px;
+  height: 768px;
+
+  display: grid;
+  grid:
+    "sidebar body" 1fr
+    / 15% 1fr;
+  gap: 8px;
+}
+
+.sidebar { grid-area: sidebar;
+  background-color: skyblue;
+}
+.body { grid-area: body; }
