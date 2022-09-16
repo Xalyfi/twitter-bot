@@ -52,9 +52,14 @@
 }
 
 /*aタグの下線を消す*/
-.page_button a {
+.page_menu a {
   text-decoration: none;
   color: whitesmoke;
+}
+
+a {
+  text-decoration: none;
+  color: deepskyblue;
 }
 
 /*メニューのホバー時の色変更*/
