@@ -1,18 +1,66 @@
 *{
   margin: 0;
 }
+
 .layout {
   width: 1920px;
   height: 1080px;
 
   display: grid;
   grid:
-    "sidebar body" 1fr
-    / 15% 1fr;
+    "sidebar body" 100%
+    / 15% auto;
   gap: 8px;
 }
 
 .sidebar { grid-area: sidebar; 
-           background-color: skyblue;
+           background-color: deepskyblue;
+          }
+.body { 
+        grid-area: body; 
+      }
+
+.title_pannel {
+  width: 100%;
+  height: 75px;
+  background-color: whitesmoke;
 }
-.body { grid-area: body; }
+
+.title {
+    padding-left: 15%;
+    padding-top: 7%;
+  font-weight: bold;
+  color: deepskyblue;
+}
+
+/*ページメニューを.sidebarに合わせて配置*/
+.page_menu {
+  padding: 0;
+  width: auto;
+  height: 75%;
+  background-color: deepskyblue;
+}
+
+.page_button {
+  font-size: 40px;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+/*aタグの下線を消す*/
+.page_button a {
+  text-decoration: none;
+  color: whitesmoke;
+}
+
+/*メニューのホバー時の色変更*/
+.page_menu li:hover {
+  transition: 500ms;
+  background-color: skyblue;
+  color: white;
+}
+
