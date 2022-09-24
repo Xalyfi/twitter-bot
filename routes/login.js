@@ -12,10 +12,8 @@ router.get('/', async (req , res) => {
           Authorization: `Bearer ${tokenSet?.access_token}`
         }
       });
-    const userdata = (await body.json()).data;
-    const username = userdata.name;
-
-    res.send(userdata.access_token);
+    const username = (await body.json()).data;
+    res.send(`${username}`);
 })
 
 module.exports = router;
