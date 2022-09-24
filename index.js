@@ -1,21 +1,21 @@
 require('dotenv').config();
 
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-var logger = require('morgan');
-var passport = require('passport');
-var session = require('express-session');
-var cookieParser = require('cookie-parser');
-var TwitterStrategy = require('passport-twitter');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const logger = require('morgan');
+const passport = require('passport');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const TwitterStrategy = require('passport-twitter');
 const { config } = require('dotenv');
 
-/*var indexRouter = require('./routes/index');
-var authRouter = require('./routes/auth');*/
+const indexRouter = require('./routes/home');
+const loginRouter = require('./routes/login')
+//const authRouter = require('./routes/auth');
 
-var app = express();
-var SQLiteStore = require('connect-sqlite3')(session);
+const app = express();
+const SQLiteStore = require('connect-sqlite3')(session);
 
 app.locals.pluralize = require('pluralize');
 
@@ -30,7 +30,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-  secret: 'keyboard cat',
+  secret: 'Xalyfi',
   resave: false,
   saveUninitialized: false,
   store: new SQLiteStore({ db: 'sessions.db', dir: './var/db' })
@@ -64,13 +64,9 @@ passport.use(new TwitterStrategy({
     }
 ));
 
-app.get('/', function(req, res) {
-    res.render('home',{user:req.user.username});
-});
 
-//自作サービス中でtwitter認証を行うURLを設定する
-app.get('/login',
-    passport.authenticate('twitter'));
+app.use('/', indexRouter);
+app.use('/login',loginRouter)
 
 //認証正常時の戻り先URLの設定をする
 app.get('/auth/twitter/callback',
