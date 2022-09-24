@@ -1,4 +1,12 @@
-*.pem
-node_modules
-config.json
+.env
+var
 
+*.pem
+
+config.*
+# Node.js
+node_modules/
+npm-debug.log*
+
+# Mac OS X
+.DS_Store
