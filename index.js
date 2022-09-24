@@ -9,6 +9,8 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const TwitterStrategy = require('passport-twitter');
 const { config } = require('dotenv');
+const { TwitterApi } = require('twitter-api-v2');
+
 
 const indexRouter = require('./routes/home');
 const loginRouter = require('./routes/login')
@@ -16,6 +18,9 @@ const loginRouter = require('./routes/login')
 
 const app = express();
 const SQLiteStore = require('connect-sqlite3')(session);
+
+let token
+let tokenSecret
 
 app.locals.pluralize = require('pluralize');
 
@@ -53,13 +58,21 @@ passport.use(new TwitterStrategy({
         consumerSecret: require('./config.json').cnsumer_secret,//TwitterのconsumerSecret
         callbackURL: require('./config.json').BASE_URL+'/auth/twitter/callback'//認証成功時の戻り先URL
     },
-    function(token, tokenSecret, profile, done) {
+    async function(token, tokenSecret, profile, done) {
         // 認証が完了したtwitterIdを検証する
         // 例えばtwitteridがDBの中に存在するかということを確認する
         // 検証結果によってdoneの書き方を以下のように指定する
         //     検証成功 : return done(null,profile);
         //     検証失敗 : return done(null,false);
         //     例外発生 : return done(null);
+        const api = new TwitterApi({
+            appKey: require('./config.json').consumer_key,
+            appSecret: require('./config.json').cnsumer_secret,
+            accessToken: token,
+            accessSecret: tokenSecret,
+        });
+        const response = await api.v1.verifyCredentials();
+        //await api.v1.tweet('おやすみ').catch(console.error);
         return done(null,profile);
     }
 ));
