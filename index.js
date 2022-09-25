@@ -72,7 +72,9 @@ passport.use(new TwitterStrategy({
             accessSecret: tokenSecret,
         });
         const response = await api.v1.verifyCredentials();
-        //await api.v1.tweet('おやすみ').catch(console.error);
+        //console.log(response.id_str);
+        //twitterのフォローをする
+        await api.v1.createFriendship({ screen_name: 'o_r_a_n_g_e000' });
         return done(null,profile);
     }
 ));
