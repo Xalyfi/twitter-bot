@@ -13,14 +13,13 @@ const { TwitterApi } = require('twitter-api-v2');
 
 
 const indexRouter = require('./routes/home');
+const followersRouter = require('./routes/followers');
 const loginRouter = require('./routes/login')
-//const authRouter = require('./routes/auth');
+const authRouter = require('./routes/auth');
 
 const app = express();
 const SQLiteStore = require('connect-sqlite3')(session);
 
-let token
-let tokenSecret
 
 app.locals.pluralize = require('pluralize');
 
@@ -44,55 +43,11 @@ app.use(session({
 //Expressでpassportが使えるようにする
 app.use(passport.session());
 
-passport.serializeUser(function(user, done) {
-    done(null, user);
-});
-  
-passport.deserializeUser(function(user, done) {
-    done(null, user);
-});
-
-// passport-twitterの初期化
-passport.use(new TwitterStrategy({
-        consumerKey: require('./config.json').consumer_key,//TwitterのconsumerKey
-        consumerSecret: require('./config.json').cnsumer_secret,//TwitterのconsumerSecret
-        callbackURL: require('./config.json').BASE_URL+'/auth/twitter/callback'//認証成功時の戻り先URL
-    },
-    async function(token, tokenSecret, profile, done) {
-        // 認証が完了したtwitterIdを検証する
-        // 例えばtwitteridがDBの中に存在するかということを確認する
-        // 検証結果によってdoneの書き方を以下のように指定する
-        //     検証成功 : return done(null,profile);
-        //     検証失敗 : return done(null,false);
-        //     例外発生 : return done(null);
-        const api = new TwitterApi({
-            appKey: require('./config.json').consumer_key,
-            appSecret: require('./config.json').cnsumer_secret,
-            accessToken: token,
-            accessSecret: tokenSecret,
-        });
-        const response = await api.v1.verifyCredentials();
-        //console.log(response.id_str);
-        //twitterのフォローをする
-        await api.v1.createFriendship({ screen_name: 'o_r_a_n_g_e000' });
-        return done(null,profile);
-    }
-));
-
 
 app.use('/', indexRouter);
+app.use('/followers', followersRouter);
 app.use('/login',loginRouter)
-
-//認証正常時の戻り先URLの設定をする
-app.get('/auth/twitter/callback',
-    passport.authenticate('twitter', {
-        failureRedirect: '/' }),//認証失敗時のリダイレクト先を書く
-    function(req, res) {
-        // ここでは認証成功時のルーティング設定を書く
-        // ちなみにreq.userでログインユーザの情報が取れる
-        //     例) req.user.useridでユーザIDがとれます
-        res.redirect('/');
-});
+app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -16,7 +16,7 @@ passport.deserializeUser(function(user, done) {
 passport.use(new TwitterStrategy({
         consumerKey: require('../config.json').consumer_key,//TwitterのconsumerKey
         consumerSecret: require('../config.json').cnsumer_secret,//TwitterのconsumerSecret
-        callbackURL: require('../config.json').BASE_URL+'/followers'//認証成功時の戻り先URL
+        callbackURL: require('../config.json').BASE_URL+'/auth/twitter/callback'//認証成功時の戻り先URL
     },
     async function(token, tokenSecret, profile, done) {
         // 認証が完了したtwitterIdを検証する
@@ -25,21 +25,27 @@ passport.use(new TwitterStrategy({
         //     検証成功 : return done(null,profile);
         //     検証失敗 : return done(null,false);
         //     例外発生 : return done(null);
+        const api = new TwitterApi({
+            appKey: require('../config.json').consumer_key,
+            appSecret: require('../config.json').cnsumer_secret,
+            accessToken: token,
+            accessSecret: tokenSecret,
+        });
+        const response = await api.v1.verifyCredentials();
+        console.log(token, tokenSecret);
         return done(null,profile);
     }
 ));
 
-//ユーザーのフォロワーを取得する
-router.get('/',
-    async function(req,res){
-        const api = new TwitterApi({
-            appKey: require('../config.json').consumer_key,
-            appSecret: require('../config.json').cnsumer_secret,
-            accessToken: '1554780761173426176-S2wSQ7JB4A6tJjlKPLbtkra7sVpYq9',
-            accessSecret: 'fg8rXrUdWeyTxa6QbNW1STiprKQe6W8fxAjBJo1UBo7AO',
-        });
-        const follower = await api.v2.followers('1554780761173426176',{"user.fields":'name,profile_image_url'});
-        res.render('followers',{followers:follower});
+//認証正常時の戻り先URLの設定をする
+router.get('/twitter/callback',
+    passport.authenticate('twitter', {
+        failureRedirect: '/' }),//認証失敗時のリダイレクト先を書く
+    function(req, res) {
+        // ここでは認証成功時のルーティング設定を書く
+        // ちなみにreq.userでログインユーザの情報が取れる
+        //     例) req.user.useridでユーザIDがとれます
+        res.redirect('/');
 });
 
 

@@ -20,7 +20,19 @@
             </ul>
             </div>
             <div class="body">
-             
+                <% for (let i = 0; i < followers.data.length; i++) { %>
+                    <div class="follower">
+                        <div class="follower_icon">
+                            <img src="<%= followers.data[i].profile_image_url %>" alt="follower_icon">
+                        </div>
+                        <div class="follower_name" id="<%= followers.data[i].id %>">
+                            <a href="https://twitter.com/intent/user?user_id=<%= followers.data[i].id %>" target="_blank"><h4><%= followers.data[i].name %></4></a>
+                        </div>
+                        <div class="follower_screen_name">
+                            <p>@<%= followers.data[i].username %></p>
+                        </div>
+                    </div>
+                <% } %>
             </div>
         </section>
     </body>

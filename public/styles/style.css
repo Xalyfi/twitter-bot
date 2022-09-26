@@ -15,10 +15,10 @@
 
 .sidebar { grid-area: sidebar; 
            background-color: deepskyblue;
-          }
+}
 .body { 
         grid-area: body; 
-      }
+}
 
 .title_pannel {
   width: 100%;
@@ -26,11 +26,16 @@
   background-color: whitesmoke;
 }
 
-.title {
+.title a {
+  text-decoration: none;
+  color: deepskyblue;
+}
+
+.title{
     padding-left: 15%;
     padding-top: 7%;
-  font-weight: bold;
-  color: deepskyblue;
+    font-weight: bold;
+    color: deepskyblue;
 }
 
 /*ページメニューを.sidebarに合わせて配置*/
@@ -57,11 +62,6 @@
   color: whitesmoke;
 }
 
-a {
-  text-decoration: none;
-  color: deepskyblue;
-}
-
 /*メニューのホバー時の色変更*/
 .page_menu li:hover {
   transition: 500ms;
@@ -69,3 +69,35 @@ a {
   color: white;
 }
 
+.follower{
+  border-radius:15px;
+  margin-top: 10px;
+  background-color: deepskyblue;
+}
+
+.follower p{
+  padding-bottom:10px;
+  padding-left: 10px;
+  font-size: 20px;
+  color: whitesmoke;
+}
+
+.follower a{
+  text-decoration: none;
+  color: whitesmoke;
+}
+
+.follower_name h4{
+  padding-left: 10px;
+  padding-top: 10px;
+  font-size: 20px;
+  color: red;
+}
+
+/*iconの真右にfollowre_nameを配置*/
+.follower_name {
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+  justify-content: left;
+}
