@@ -38,7 +38,8 @@ router.get('/',
             accessToken: '1554780761173426176-S2wSQ7JB4A6tJjlKPLbtkra7sVpYq9',
             accessSecret: 'fg8rXrUdWeyTxa6QbNW1STiprKQe6W8fxAjBJo1UBo7AO',
         });
-        const follower = await api.v2.followers('1554780761173426176',{"user.fields":'name,profile_image_url'});
+        const follower = await api.v2.followers('1554780761173426176',{"user.fields":'name,profile_image_url,description'});
+        console.log(follower);
         res.render('followers',{followers:follower});
 });
 
