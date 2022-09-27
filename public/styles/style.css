@@ -70,13 +70,14 @@
 }
 
 .follower{
+  padding-bottom: 5%;
+  display: flex;
   border-radius:15px;
   margin-top: 10px;
   background-color: deepskyblue;
 }
 
 .follower p{
-  padding-bottom:10px;
   padding-left: 10px;
   font-size: 20px;
   color: whitesmoke;
@@ -89,15 +90,28 @@
 
 .follower_name h4{
   padding-left: 10px;
-  padding-top: 10px;
+  padding-top: 1px;
   font-size: 20px;
   color: red;
 }
 
-/*iconの真右にfollowre_nameを配置*/
-.follower_name {
-  display: flex;
-  flex-direction: row;
-  align-items: left;
-  justify-content: left;
+.follower_icon{
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.follower_icon img{
+  border-radius: 50%;
+}
+
+.f {
+  display: inline-block;
+}
+
+.follower_description{
+  display:block;
+  padding-left: 10px;
+  padding-top: 10px;
+  font-size: 15px;
+  color: whitesmoke;
 }
