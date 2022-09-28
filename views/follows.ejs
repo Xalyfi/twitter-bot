@@ -41,38 +41,35 @@
             </ul>
         </div>
         <div class="body">
-            <div class="header">
-                <h2 class="page_title">フォロワー一覧</h2>
-                <h3 class="follow_count"><%= followers.meta.result_count %>人にされています。</h3>
-            </div>
-            <div class="follower_list">
-                <% for (let i=0; i < followers.data.length; i++) { %>
+                <div class="header">
+                    <h2 class="page_title">フォロー一覧</h2>
+                    <h3 class="follow_count"><%= follows.meta.result_count %> 人をフォローしています。</h3>
+                </div>
+                <div class="follower_list">
+                <% for (let i=0; i < follows.data.length; i++) { %>
                     <div class="follower">
                         <div class="f">
                             <div class="follower_icon">
-                                <a href="https://twitter.com/intent/user?user_id=<%= followers.data[i].id %>"
-                                    target="_blank">
-                                    <img src="<%= followers.data[i].profile_image_url %>" alt="follower_icon">
-                                </a>
+                                <img src="<%= follows.data[i].profile_image_url %>" alt="follower_icon">
                             </div>
                             <div class="f2">
-                                <div class="follower_name" id="<%= followers.data[i].id %>">
-                                    <a href="https://twitter.com/intent/user?user_id=<%= followers.data[i].id %>"
+                                <div class="follower_name" id="<%= follows.data[i].id %>">
+                                    <a href="https://twitter.com/intent/user?user_id=<%= follows.data[i].id %>"
                                         target="_blank">
                                         <h4>
-                                            <%= followers.data[i].name %>
+                                            <%= follows.data[i].name %>
                                         </h4>
                                     </a>
                                 </div>
                                 <div class="follower_screen_name">
-                                    <p>@<%= followers.data[i].username %>
+                                    <p>@<%= follows.data[i].username %>
                                     </p>
                                 </div>
                             </div>
                         </div>
                         <div class="follower_description">
                             <p>
-                                <% const description = followers.data[i].description.replace(/\r?\n/g, '<br>') %>
+                                <% const description = follows.data[i].description.replace(/\r?\n/g, '<br>') %>
                                 <% const description2 = description.replace(/(https?:\/\/[\w/:%#\$&\?\(\)~\.=\+\-]+)/g, '<a href="$1" target="_blank">$1</a>') %>
                                 <%- description2.replace(/@([a-zA-Z0-9_]+)/g, '<a href="https://twitter.com/$1" target="_blank">@$1</a>') %> 
                             </p>

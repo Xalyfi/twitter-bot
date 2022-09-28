@@ -14,7 +14,7 @@ passport.deserializeUser(function(user, done) {
 // passport-twitterの初期化
 passport.use(new TwitterStrategy({
         consumerKey: require('../config.json').consumer_key,//TwitterのconsumerKey
-        consumerSecret: require('../config.json').cnsumer_secret,//TwitterのconsumerSecret
+        consumerSecret: require('../config.json').consumer_secret,//TwitterのconsumerSecret
         callbackURL: require('../config.json').BASE_URL+'/auth/twitter/callback'//認証成功時の戻り先URL
     },
     function(token, tokenSecret, profile, done) {

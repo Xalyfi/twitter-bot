@@ -15,7 +15,7 @@ passport.deserializeUser(function(user, done) {
 // passport-twitterの初期化
 passport.use(new TwitterStrategy({
         consumerKey: require('../config.json').consumer_key,//TwitterのconsumerKey
-        consumerSecret: require('../config.json').cnsumer_secret,//TwitterのconsumerSecret
+        consumerSecret: require('../config.json').consumer_secret,//TwitterのconsumerSecret
         callbackURL: require('../config.json').BASE_URL+'/followers'//認証成功時の戻り先URL
     },
     async function(token, tokenSecret, profile, done) {
@@ -29,16 +29,17 @@ passport.use(new TwitterStrategy({
     }
 ));
 
-//ユーザーのフォロワーを取得する
-router.get('/',
-    async function(req,res){
+//認証した後のリダイレクト先を/followersに設定する
+router.get('/', passport.authenticate('twitter', { failureRedirect: '/' }),
+    async function(req, res) {
+
         const api = new TwitterApi({
             appKey: require('../config.json').consumer_key,
-            appSecret: require('../config.json').cnsumer_secret,
+            appSecret: require('../config.json').consumer_secret,
             accessToken: '1554780761173426176-S2wSQ7JB4A6tJjlKPLbtkra7sVpYq9',
             accessSecret: 'fg8rXrUdWeyTxa6QbNW1STiprKQe6W8fxAjBJo1UBo7AO',
         });
-        const follower = await api.v2.followers('1554780761173426176',{"user.fields":'name,profile_image_url,description'});
+        const follower = await api.v2.followers(req.user.userid,{"user.fields":'name,profile_image_url,description'});
         console.log(follower);
         res.render('followers',{followers:follower});
 });

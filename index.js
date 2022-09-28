@@ -9,11 +9,11 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const TwitterStrategy = require('passport-twitter');
 const { config } = require('dotenv');
-const { TwitterApi } = require('twitter-api-v2');
 
 
 const indexRouter = require('./routes/home');
 const followersRouter = require('./routes/followers');
+const followsRouter = require('./routes/follow');
 const loginRouter = require('./routes/login')
 const authRouter = require('./routes/auth');
 
@@ -46,6 +46,7 @@ app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/followers', followersRouter);
+app.use('/follows', followsRouter);
 app.use('/login',loginRouter)
 app.use('/auth', authRouter);
 
