@@ -35,8 +35,8 @@ router.get('/',
         const api = new TwitterApi({
             appKey: require('../config.json').consumer_key,
             appSecret: require('../config.json').consumer_secret,
-            accessToken: '1554780761173426176-S2wSQ7JB4A6tJjlKPLbtkra7sVpYq9',
-            accessSecret: 'fg8rXrUdWeyTxa6QbNW1STiprKQe6W8fxAjBJo1UBo7AO',
+            accessToken: '',
+            accessSecret: '',
         });
         const follows = await api.v2.following('1554780761173426176',{"user.fields":'name,profile_image_url,description'});
         console.log(follows);

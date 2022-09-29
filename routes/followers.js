@@ -29,15 +29,18 @@ passport.use(new TwitterStrategy({
     }
 ));
 
+router.get('/',
+    passport.authenticate('twitter'));
+
 //認証した後のリダイレクト先を/followersに設定する
-router.get('/', passport.authenticate('twitter', { failureRedirect: '/' }),
+router.get('/auth', passport.authenticate('twitter', { failureRedirect: '/' }),
     async function(req, res) {
 
         const api = new TwitterApi({
             appKey: require('../config.json').consumer_key,
             appSecret: require('../config.json').consumer_secret,
-            accessToken: '1554780761173426176-S2wSQ7JB4A6tJjlKPLbtkra7sVpYq9',
-            accessSecret: 'fg8rXrUdWeyTxa6QbNW1STiprKQe6W8fxAjBJo1UBo7AO',
+            accessToken: '',
+            accessSecret: '',
         });
         const follower = await api.v2.followers(req.user.userid,{"user.fields":'name,profile_image_url,description'});
         console.log(follower);

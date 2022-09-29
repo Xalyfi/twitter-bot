@@ -25,14 +25,7 @@ passport.use(new TwitterStrategy({
         //     検証成功 : return done(null,profile);
         //     検証失敗 : return done(null,false);
         //     例外発生 : return done(null);
-        const api = new TwitterApi({
-            appKey: require('../config.json').consumer_key,
-            appSecret: require('../config.json').consumer_secret,
-            accessToken: token,
-            accessSecret: tokenSecret,
-        });
-        const response = await api.v1.verifyCredentials();
-        console.log(token, tokenSecret);
+
         return done(null,profile);
     }
 ));
