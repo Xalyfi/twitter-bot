@@ -11,7 +11,8 @@ router.get('/',
             accessToken: require('../config.json').access_token,
             accessSecret: require('../config.json').access_token_secret,
         });
-        const follows = await api.v2.following(req.user.id,{"user.fields":'name,profile_image_url,description'});
+        const follows = await api.v2.following(req.user.id,{"user.fields":'name,profile_image_url,description','pagination_token':req.query.page});
+        console.log(follows);
         res.render('follows',{follows:follows});
 });
 
