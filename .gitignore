@@ -3,6 +3,7 @@ var
 
 *.pem
 
+.vscode
 config.*
 # Node.js
 node_modules/
