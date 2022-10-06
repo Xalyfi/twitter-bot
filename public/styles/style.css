@@ -1,23 +1,25 @@
-*{
+* {
   margin: 0;
 }
 
 .layout {
   width: 1920px;
-  height: 1080px;
+  height: 100vh;
 
   display: grid;
   grid:
-    "sidebar body" 100%
-    / 15% auto;
+    "sidebar body" 100% / 15% auto;
   gap: 8px;
 }
 
-.sidebar { grid-area: sidebar; 
-           background-color: deepskyblue;
+.sidebar {
+  grid-area: sidebar;
+  background-color: deepskyblue;
 }
-.body { 
-        grid-area: body; 
+
+.body {
+  overflow: auto;
+  grid-area: body;
 }
 
 .title_pannel {
@@ -27,7 +29,7 @@
   background-color: whitesmoke;
 }
 
-.title_pannel img{
+.title_pannel img {
   padding-top: 10px;
   padding-left: 20px;
   width: 50px;
@@ -39,12 +41,12 @@
   color: deepskyblue;
 }
 
-.title{
-    font-size: 125%;
-    padding-left: 7%;
-    padding-top: 7%;
-    font-weight: bold;
-    color: deepskyblue;
+.title {
+  font-size: 125%;
+  padding-left: 7%;
+  padding-top: 7%;
+  font-weight: bold;
+  color: deepskyblue;
 }
 
 /*ページメニューを.sidebarに合わせて配置*/
@@ -79,7 +81,7 @@
 }
 
 .header {
-  display:flex;
+  display: flex;
   width: 100%;
   height: 75px;
 }
@@ -90,43 +92,43 @@
   padding-left: 20px;
 }
 
-.follow_count{
+.follow_count {
   font-size: 30px;
   padding-left: 55%;
   padding-top: 17px;
 }
 
-.follower{
+.follower {
   padding-bottom: auto;
-  border-radius:15px;
+  border-radius: 15px;
   margin-top: 10px;
   background-color: deepskyblue;
 }
 
-.follower p{
+.follower p {
   padding-left: 10px;
   font-size: 20px;
   color: whitesmoke;
 }
 
-.follower a{
+.follower a {
   text-decoration: none;
   color: whitesmoke;
 }
 
-.follower_name h4{
+.follower_name h4 {
   padding-left: 10px;
   padding-top: 1px;
   font-size: 20px;
   color: whitesmoke;
 }
 
-.follower_icon{
+.follower_icon {
   padding-top: 10px;
   padding-left: 10px;
 }
 
-.follower_icon img{
+.follower_icon img {
   border-radius: 50%;
 }
 
@@ -134,12 +136,12 @@
   display: flex;
 }
 
-.f2{
+.f2 {
   display: inline-block;
 }
 
-.follower_description{
-  display:block;
+.follower_description {
+  display: block;
   padding-left: 10px;
   padding-top: 10px;
   font-size: 15px;
@@ -149,145 +151,150 @@
 @media screen and (max-width: 958px) {
   .layout {
     width: 958px;
-    height: 100%;
+    height: 100vh;
     display: grid;
     grid:
-      "sidebar body" 100%
-      / 15% auto;
+      "sidebar body" 100% / 15% auto;
     gap: 8px;
   }
 
-.sidebar { grid-area: sidebar; 
-           background-color: deepskyblue;
-}
-.body { 
-        grid-area: body; 
-}
+  /*サイドバーは固定する*/
+  .sidebar {
+    grid-area: sidebar;
+    background-color: deepskyblue;
+  }
 
-.title_pannel {
-  font-size: 10px;
-  display: flex;
-  width: 100%;
-  height: 55px;
-  background-color: whitesmoke;
-}
+  /*bodyだけをスクロールできるようにする*/
+  .body {
+    overflow: auto;
+    grid-area: body;
+  }
 
-.title_pannel img{
-  padding-top: 5px;
-  padding-left: 15px;
-  width: 40px;
-  height: 40px;
-}
+  .title_pannel {
 
-.title a {
-  text-decoration: none;
-  color: deepskyblue;
-}
+    font-size: 10px;
+    display: flex;
+    width: 100%;
+    height: 55px;
+    background-color: whitesmoke;
+  }
 
-.title{
+  .title_pannel img {
+    padding-top: 5px;
+    padding-left: 15px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .title a {
+    text-decoration: none;
+    color: deepskyblue;
+  }
+
+  .title {
     font-size: 125%;
     padding-left: 7%;
     padding-top: 7%;
     font-weight: bold;
     color: deepskyblue;
-}
+  }
 
-/*ページメニューを.sidebarに合わせて配置*/
-.page_menu {
-  padding: 0;
-  width: auto;
-  height: 75%;
-  background-color: deepskyblue;
-}
+  /*ページメニューを.sidebarに合わせて配置*/
+  .page_menu {
+    padding: 0;
+    width: auto;
+    height: 75%;
+    background-color: deepskyblue;
+  }
 
-.page_button {
-  font-size: 25px;
-  padding-top: 7px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  .page_button {
+    font-size: 25px;
+    padding-top: 7px;
 
-}
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-/*aタグの下線を消す*/
-.page_menu a {
-  text-decoration: none;
-  color: whitesmoke;
-}
+  }
 
-/*メニューのホバー時の色変更*/
-.page_menu li:hover {
-  transition: 500ms;
-  background-color: skyblue;
-  color: white;
-}
+  /*aタグの下線を消す*/
+  .page_menu a {
+    text-decoration: none;
+    color: whitesmoke;
+  }
 
-.header {
-  display:flex;
-  width: 100%;
-  height: 75px;
-}
+  /*メニューのホバー時の色変更*/
+  .page_menu li:hover {
+    transition: 500ms;
+    background-color: skyblue;
+    color: white;
+  }
 
-.page_title {
-  font-size: 21px;
-  padding-top: 25px;
-  padding-left: 2px;
-}
+  .header {
+    display: flex;
+    width: 100%;
+    height: 75px;
+  }
 
-.follow_count{
-  padding-left: 50%;
-  font-size: 20px;
-  padding-top: 25px;
-}
+  .page_title {
+    font-size: 21px;
+    padding-top: 25px;
+    padding-left: 2px;
+  }
 
-.follower{
-  padding-bottom: auto;
-  border-radius:15px;
-  margin-top: 10px;
-  background-color: deepskyblue;
-}
+  .follow_count {
+    padding-left: 50%;
+    font-size: 20px;
+    padding-top: 25px;
+  }
 
-.follower p{
-  padding-left: 10px;
-  font-size: 15px;
-  color: whitesmoke;
-}
+  .follower {
+    padding-bottom: auto;
+    border-radius: 15px;
+    margin-top: 10px;
+    background-color: deepskyblue;
+  }
 
-.follower a{
-  text-decoration: none;
-  color: whitesmoke;
-}
+  .follower p {
+    padding-left: 10px;
+    font-size: 15px;
+    color: whitesmoke;
+  }
 
-.follower_name h4{
-  padding-left: 10px;
-  padding-top: 7px;
-  font-size: 15px;
-  color: whitesmoke;
-}
+  .follower a {
+    text-decoration: none;
+    color: whitesmoke;
+  }
 
-.follower_icon{
-  padding-top: 7px;
-  padding-left: 10px;
-}
+  .follower_name h4 {
+    padding-left: 10px;
+    padding-top: 7px;
+    font-size: 15px;
+    color: whitesmoke;
+  }
 
-.follower_icon img{
-  border-radius: 50%;
-  width: 40px;
-}
+  .follower_icon {
+    padding-top: 7px;
+    padding-left: 10px;
+  }
 
-.f {
-  display: flex;
-}
+  .follower_icon img {
+    border-radius: 50%;
+    width: 40px;
+  }
 
-.f2{
-  display: inline-block;
-}
+  .f {
+    display: flex;
+  }
 
-.follower_description{
-  display:block;
-  padding-left: 10px;
-  padding-top: 0px;
-}
+  .f2 {
+    display: inline-block;
+  }
+
+  .follower_description {
+    display: block;
+    padding-left: 10px;
+    padding-top: 0px;
+  }
 
 }
