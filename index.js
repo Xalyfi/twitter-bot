@@ -13,7 +13,7 @@ const { config } = require('dotenv');
 
 const indexRouter = require('./routes/home');
 const followersRouter = require('./routes/followers');
-const followsRouter = require('./routes/follow');
+const followsRouter = require('./routes/follows');
 const loginRouter = require('./routes/login')
 const authRouter = require('./routes/auth');
 
